@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: hue-intern
+        image: europe-west4-docker.pkg.dev/stage-kora-dokbua/hue-intern/hue-intern:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
