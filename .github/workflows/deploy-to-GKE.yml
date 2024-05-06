@@ -33,14 +33,15 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
       with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        #service_account_key: ${{ secrets.GKE_SA_KEY }}
         project_id: ${{ secrets.GKE_PROJECT }}
+        
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
     - name: Quiet auth 
       run: |-
-        gcloud --quiet auth configure-docker || kubectl -v
+        gcloud --quiet auth configure-docker
 
     # Setup gcloud CLI AGAIN
     - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
