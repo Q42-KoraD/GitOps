@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   labels:
     app: hue-intern
@@ -12,14 +12,22 @@ spec:
   selector:
     matchLabels:
       app: hue-intern
+  # strategy:
+  #   rollingUpdate:
+  #     maxSurge: 25%
+  #     maxUnavailable: 25%
+  #   type: RollingUpdate
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+    canary:
+      maxSurge: "25%"
+      maxUnavailable: 0
+      steps:
+      - setWeight: 50
+      - pause:
+         duration: 60
   template:
     metadata:
-      creationTimestamp: null
+      # creationTimestamp: null
       labels:
         app: hue-intern
     spec:
