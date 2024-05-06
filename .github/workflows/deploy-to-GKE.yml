@@ -40,7 +40,7 @@ jobs:
     # helper for authentication
     - name: Quiet auth 
       run: |-
-        gcloud --quiet auth configure-docker
+        gcloud --quiet auth configure-docker || kubectl -v
 
     # Setup gcloud CLI AGAIN
     - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
