@@ -22,9 +22,17 @@ spec:
       maxSurge: "25%"
       maxUnavailable: 0
       steps:
-      - setWeight: 50
+      - setWeight: 75
       - pause:
-         duration: 60
+          duration: 30
+      - setWeight: 80
+      - pause:
+          duration: 30
+      - setWeight: 99
+      - pause:
+          duration: 30
+      
+     
   template:
     metadata:
       # creationTimestamp: null
