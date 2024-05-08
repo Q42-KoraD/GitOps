@@ -8,7 +8,7 @@ metadata:
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: hue-intern
@@ -22,9 +22,9 @@ spec:
       maxSurge: "25%"
       maxUnavailable: 0
       steps:
-      - setWeight: 75
+      - setWeight: 50
       - pause:
-         duration: 90
+         duration: 60
   template:
     metadata:
       # creationTimestamp: null
@@ -32,7 +32,7 @@ spec:
         app: hue-intern
     spec:
       containers:
-      - image: europe-west4-docker.pkg.dev/stage-kora-dokbua/hue-intern/hue-intern:807d9ae49b24f8d9ee909777321d5f8b773e545c
+      - image: europe-west4-docker.pkg.dev/stage-kora-dokbua/hue-intern/hue-intern:a10fe55d435ba7e14168d4e14e2a4e12f242dadc
         imagePullPolicy: Always
         name: hue-intern
         ports:
