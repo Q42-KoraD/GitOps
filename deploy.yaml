@@ -8,15 +8,10 @@ metadata:
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: hue-intern
-  # strategy:
-  #   rollingUpdate:
-  #     maxSurge: 25%
-  #     maxUnavailable: 25%
-  #   type: RollingUpdate
   strategy:
     canary:
       maxSurge: "25%"
@@ -24,10 +19,15 @@ spec:
       steps:
       - setWeight: 50
       - pause:
-         duration: 60
+          duration: 30
+      - setWeight: 80
+      - pause:
+          duration: 30
+      - setWeight: 99
+      - pause:
+          duration: 90
   template:
     metadata:
-      # creationTimestamp: null
       labels:
         app: hue-intern
     spec:
