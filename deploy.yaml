@@ -24,7 +24,7 @@ spec:
       steps:
       - setWeight: 75
       - pause:
-         duration: 60
+         duration: 90
   template:
     metadata:
       # creationTimestamp: null
