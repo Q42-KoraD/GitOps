@@ -22,17 +22,9 @@ spec:
       maxSurge: "25%"
       maxUnavailable: 0
       steps:
-      - setWeight: 75
+      - setWeight: 50
       - pause:
-          duration: 30
-      - setWeight: 80
-      - pause:
-          duration: 30
-      - setWeight: 99
-      - pause:
-          duration: 30
-      
-     
+         duration: 60
   template:
     metadata:
       # creationTimestamp: null
@@ -40,7 +32,7 @@ spec:
         app: hue-intern
     spec:
       containers:
-      - image: europe-west4-docker.pkg.dev/stage-kora-dokbua/hue-intern/hue-intern:a10fe55d435ba7e14168d4e14e2a4e12f242dadc
+      - image: europe-west4-docker.pkg.dev/stage-kora-dokbua/hue-intern/hue-intern:ca6c5c214057b62acb37cc69385f4200776eb334
         imagePullPolicy: Always
         name: hue-intern
         ports:
