@@ -22,8 +22,8 @@ spec:
           value: tenant_a
         query: |
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"{{args.hue-intern}}",response_code!~"5.*"}[5m]
+            istio_requests_total{reporter="source",destination_service=~"{{args.name}}",response_code!~"5.*"}[5m]
           )) /
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"{{args.hue-intern}}"}[5m]
+            istio_requests_total{reporter="source",destination_service=~"{{args.name}}"}[5m]
           ))
