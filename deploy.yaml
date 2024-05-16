@@ -14,6 +14,9 @@ spec:
       app: hue-intern
   strategy:
     canary:
+      analysis:
+          templates:
+          - templateName: success-rate
       maxSurge: "25%"
       maxUnavailable: 0
       steps:
