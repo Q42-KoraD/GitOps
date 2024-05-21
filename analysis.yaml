@@ -18,9 +18,9 @@ spec:
         address: https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query
         # timeout is expressed in seconds
         timeout: 40
-        headers:
-        - name: Authorization
-          value: "Bearer ${{ secrets.GCLOUD_ACCESS_TOKEN }}"
+        # headers:
+        # - name: Authorization
+        #   value: "Bearer ${{ secrets.GCLOUD_ACCESS_TOKEN }}"
         query: |
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"{{args.hue-intern-service}}",response_code!~"5.*"}[5m]
