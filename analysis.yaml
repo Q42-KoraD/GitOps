@@ -3,6 +3,8 @@ kind: AnalysisTemplate
 metadata:
   name: success-rate
 spec:
+  args:
+  - name: hue-intern-service
   metrics:
   - name: success-rate
     interval: 5m
@@ -18,11 +20,11 @@ spec:
         timeout: 40
         headers:
         - name: Authorization
-          value: Bearer ${{ secrets.GCLOUD_ACCESS_TOKEN }}
+          value: "Bearer ${{ secrets.GCLOUD_ACCESS_TOKEN }}"
         query: |
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"hue-intern-service",response_code!~"5.*"}[5m]
+            istio_requests_total{reporter="source",destination_service=~"{{args.hue-intern-service}}",response_code!~"5.*"}[5m]
           )) /
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"hue-intern-service"}[5m]
+            istio_requests_total{reporter="source",destination_service=~"{{args.hue-intern-service}}"}[5m]
           ))
