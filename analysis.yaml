@@ -18,7 +18,7 @@ spec:
         timeout: 40
         headers:
         - name: Authorization
-          value: Bearer 
+          value: Bearer ${{ secrets.GCLOUD_ACCESS_TOKEN }}
         query: |
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"{{args.name}}",response_code!~"5.*"}[5m]
