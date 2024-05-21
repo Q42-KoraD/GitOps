@@ -16,9 +16,9 @@ spec:
         address: https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query
         # timeout is expressed in seconds
         timeout: 40
-        # headers:
-        # - name: X-Scope-Org-ID
-        #   value: tenant_a
+        headers:
+        - name: Authorization
+          value: Bearer 
         query: |
           sum(irate(
             istio_requests_total{reporter="source",destination_service=~"{{args.name}}",response_code!~"5.*"}[5m]
