@@ -23,8 +23,8 @@ spec:
           value: 'Bearer ya29.a0AXooCgv481nMqgJVit6Y03zmu0nB0Af-3fHush3DdnY7hZlk6WTeJbfEOwifbp4lZ4_5oL3WEYvcYbzJiLPp7DaiJtLaULsnmp9l-R8DGeGZixVvZwYIF1yn_Cmpfa3XmuiTnaQChHZx7AQ9ChL1UJh4q_54asON6P2zpICTAVn1aCgYKARYSARESFQHGX2MiKMiR00MuRudwBqDaKaR3zw0179'
         query: '
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"hue-intern-service",response_code!~"5.*"}[5m]
+            requests_total{reporter="source",destination_service=~"hue-intern-service",response_code!~"5.*"}[5m]
           )) /
           sum(irate(
-            istio_requests_total{reporter="source",destination_service=~"hue-intern-service"}[5m]
+            requests_total{reporter="source",destination_service=~"hue-intern-service"}[5m]
           ))'
