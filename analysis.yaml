@@ -10,7 +10,7 @@ spec:
     interval: 5s
     # NOTE: prometheus queries return results in the form of a vector.
     # So it is common to access the index 0 of the returned array to obtain the value
-    successCondition: result[0] >= 1
+    successCondition: result[1] >= 1
     # failureCondition: result[0] < 0.9
     failureLimit: 1
     provider:
@@ -20,5 +20,5 @@ spec:
         timeout: 40
         headers:
         - key: 'Authorization'
-          value: 'Bearer ya29.a0AXooCgv481nMqgJVit6Y03zmu0nB0Af-3fHush3DdnY7hZlk6WTeJbfEOwifbp4lZ4_5oL3WEYvcYbzJiLPp7DaiJtLaULsnmp9l-R8DGeGZixVvZwYIF1yn_Cmpfa3XmuiTnaQChHZx7AQ9ChL1UJh4q_54asON6P2zpICTAVn1aCgYKARYSARESFQHGX2MiKMiR00MuRudwBqDaKaR3zw0179'
-        query: 'rate((http_requests_total)[5m:])'
+          value: 'Bearer ya29.a0AXooCgulAbIjcNWwxKOZpQNV7-VpH8O1M0P3unwL9XXmsFBnN_rgeOy0KMoFQvgcshiedmElHUBfFtLXSwU8f0JZJAqb5kIHS9mU-Rg8zFwyTapTVr0gTYuys0hv4f_d15Z_NnyGM4l0YYQHD1ma0tJM5Ekm2QUh7fk4KxIKkq_raCgYKAS8SARESFQHGX2MidhKQpwiw-seirht_qS-5_Q0179'
+        query: 'kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
