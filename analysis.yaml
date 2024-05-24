@@ -15,7 +15,7 @@ spec:
     failureLimit: 1
     provider:
       prometheus:
-        address: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query '
+        address: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus '
         # timeout is expressed in seconds
         timeout: 40
         headers:
