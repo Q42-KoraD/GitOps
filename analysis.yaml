@@ -21,4 +21,4 @@ spec:
         headers:
         - key: 'Authorization'
           value: 'Bearer ya29.a0AXooCgulAbIjcNWwxKOZpQNV7-VpH8O1M0P3unwL9XXmsFBnN_rgeOy0KMoFQvgcshiedmElHUBfFtLXSwU8f0JZJAqb5kIHS9mU-Rg8zFwyTapTVr0gTYuys0hv4f_d15Z_NnyGM4l0YYQHD1ma0tJM5Ekm2QUh7fk4KxIKkq_raCgYKAS8SARESFQHGX2MidhKQpwiw-seirht_qS-5_Q0179'
-        query: 'kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
+        query: 'up'
