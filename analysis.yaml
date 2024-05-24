@@ -15,7 +15,7 @@ spec:
     failureLimit: 1
     provider:
       prometheus:
-        address: 'prometheus-server.default.svc.cluster.local'
+        address: '10.117.10.53'
         # timeout is expressed in seconds
         timeout: 40
         headers:
