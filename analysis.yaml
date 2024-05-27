@@ -43,6 +43,6 @@ spec:
         timeoutSeconds: 20 # defaults to 10 seconds
         headers:
           - key: Authorization
-            value: "Bearer ya29.a0AXooCgvepRMka_oNUrCz0WHh50O6OrNt_T64hd88WzYJUHa3VZe0DCDxcaM_iTU3Hh9i3LmF40VoTJTeBuW3KB7NXGDcIlOwx1Ol-hycFcUuLo8jOpTh2eXEo3AkNF8oA0RKutHhC4PD3-ezxG7nQnQ8Yo3SouVENqlMooWUCeNiaCgYKAXMSARESFQHGX2MiXdMvpnzjVv4mNvDGYXa0OA0179"
+            value: "Bearer ya29.a0AXooCguMxOw1aiUHbdcpmoJoDsA7lkUddSGro-uBdkFio8NiyiwKHqRCzkBZuz4b3S2NiuFeIpo3XCQskLJly_ZJC988CxjvFbUK3Az9KSSAkmjpfPd9OJoDmgh_aB1vCSsjC3ASEtpteP6gR9AnDRb3TAb4tJ7BO7D_qtYcMjQ7aCgYKAdgSARESFQHGX2MiulW8PYJvHicCsTWCM98BqQ0179"
         jsonPath: "{$.data.result}"
 
