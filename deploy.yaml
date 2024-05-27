@@ -16,7 +16,7 @@ spec:
     canary:
       analysis:
         templates:
-        - templateName: success-rate
+        - templateName: webmetric
         startingStep: 1 # delay starting analysis run until setWeight: 40%
         args:
         - name: hue-intern-service
