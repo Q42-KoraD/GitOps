@@ -30,16 +30,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: success-rate
+  name: cpu-usage-time
 spec:
   args:
   - name: hue-intern-service
   metrics:
   - name: webmetric
-    successCondition: result[0].value[1] == "1"
+    successCondition: result[0].value[1] >= "30"
     provider:
       web:
-        url: "https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=up"
+        url: "https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}"
         timeoutSeconds: 20 # defaults to 10 seconds
         headers:
           - key: Authorization
