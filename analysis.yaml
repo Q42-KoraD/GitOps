@@ -1,27 +1,40 @@
-apiVersion: argoproj.io/v1alpha1
-kind: AnalysisTemplate
-metadata:
-  name: success-rate
-spec:
-  args:
-  - name: hue-intern-service
-  metrics:
-  - name: success-rate
-    interval: 5s
-    # NOTE: prometheus queries return results in the form of a vector.
-    # So it is common to access the index 0 of the returned array to obtain the value
-    successCondition: data.result[0].value[1] >= 1
-    # failureCondition: result[0] < 0.9
-    failureLimit: 1
+# apiVersion: argoproj.io/v1alpha1
+# kind: AnalysisTemplate
+# metadata:
+#   name: success-rate
+# spec:
+#   args:
+#   - name: hue-intern-service
+#   metrics:
+#   - name: success-rate
+#     interval: 5s
+#     # NOTE: prometheus queries return results in the form of a vector.
+#     # So it is common to access the index 0 of the returned array to obtain the value
+#     successCondition: data.result[0].value[1] >= 1
+#     # failureCondition: result[0] < 0.9
+#     failureLimit: 1
+#     provider:
+#       prometheus:
+#         address: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query/'
+#         # timeout is expressed in seconds
+#         timeout: 40
+#         headers:
+#         - key: 'Authorization'
+#           value: 'Bearer ya29.a0AXooCgtVdC4TmzGlrcMb_Jtfru4gQHULDGDAzuweKlLynZz1_FJkbVqX2KIV4r3lX2gTa_8sFBvS__3DTYGL34lZrDUlII0H4jOzK67qshI9o4MuN5NC1gkXJ4qqjfwXPmWWG63lFwtTPI65F7sZJu51uueLrpti26HgawoSHMBAaCgYKAd4SARESFQHGX2MiGZD2bx6NHYoEHYLRDhESOA0179'
+#         query: 'up'
+#         # data:
+#         # - key: 'query'
+#         #   value: 'up'
+
+# ---
+metrics:
+  - name: webmetric
+    successCondition: result[0].value[1] == "1"
     provider:
-      prometheus:
-        address: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query/'
-        # timeout is expressed in seconds
-        timeout: 40
+      web:
+        url: "https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?=up"
+        timeoutSeconds: 20 # defaults to 10 seconds
         headers:
-        - key: 'Authorization'
-          value: 'Bearer ya29.a0AXooCgtVdC4TmzGlrcMb_Jtfru4gQHULDGDAzuweKlLynZz1_FJkbVqX2KIV4r3lX2gTa_8sFBvS__3DTYGL34lZrDUlII0H4jOzK67qshI9o4MuN5NC1gkXJ4qqjfwXPmWWG63lFwtTPI65F7sZJu51uueLrpti26HgawoSHMBAaCgYKAd4SARESFQHGX2MiGZD2bx6NHYoEHYLRDhESOA0179'
-        query: 'up'
-        # data:
-        # - key: 'query'
-        #   value: 'up'
+          - key: Authorization
+            value: "Bearer ya29.a0AXooCgvepRMka_oNUrCz0WHh50O6OrNt_T64hd88WzYJUHa3VZe0DCDxcaM_iTU3Hh9i3LmF40VoTJTeBuW3KB7NXGDcIlOwx1Ol-hycFcUuLo8jOpTh2eXEo3AkNF8oA0RKutHhC4PD3-ezxG7nQnQ8Yo3SouVENqlMooWUCeNiaCgYKAXMSARESFQHGX2MiXdMvpnzjVv4mNvDGYXa0OA0179"
+        jsonPath: "{$.data.result}"
