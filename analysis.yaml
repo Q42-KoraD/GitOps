@@ -22,5 +22,6 @@ spec:
         - key: 'Authorization'
           value: 'Bearer ya29.a0AXooCgtVdC4TmzGlrcMb_Jtfru4gQHULDGDAzuweKlLynZz1_FJkbVqX2KIV4r3lX2gTa_8sFBvS__3DTYGL34lZrDUlII0H4jOzK67qshI9o4MuN5NC1gkXJ4qqjfwXPmWWG63lFwtTPI65F7sZJu51uueLrpti26HgawoSHMBAaCgYKAd4SARESFQHGX2MiGZD2bx6NHYoEHYLRDhESOA0179'
         # query: 'up'
+        data:
         - key: 'query'
           value: 'up'
