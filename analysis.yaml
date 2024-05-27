@@ -20,7 +20,7 @@ spec:
         timeout: 40
         headers:
         - key: 'Authorization'
-          value: 'ya29.a0AXooCgt5HdvxPNOEXw-JCaAsdux6vGBqn3snemqRlYF5npES7kheo_uh084GyjV3JJekYUCVRdg3u-uOmQmw7SHfhAg9VQrJa9kPxujgBAjhkOf1_XZqVMkjEwgn8AowSXMV2HzG35z5PAWCucSzJNrAgfvu3EcLu4ISRuisTqwMaCgYKAYoSARESFQHGX2Mi-eq91FU4oCRSA2FDLQnYXA0179'
+          value: 'Bearer ya29.a0AXooCgt5HdvxPNOEXw-JCaAsdux6vGBqn3snemqRlYF5npES7kheo_uh084GyjV3JJekYUCVRdg3u-uOmQmw7SHfhAg9VQrJa9kPxujgBAjhkOf1_XZqVMkjEwgn8AowSXMV2HzG35z5PAWCucSzJNrAgfvu3EcLu4ISRuisTqwMaCgYKAYoSARESFQHGX2Mi-eq91FU4oCRSA2FDLQnYXA0179'
         # query: 'up'
         - key: 'query'
           value: 'up'
