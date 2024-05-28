@@ -27,42 +27,73 @@
 #         #   value: 'up'
 
 # ---
-apiVersion: argoproj.io/v1alpha1
-kind: AnalysisTemplate
-metadata:
-  name: cpu-usage-time
-spec:
-  args:
-  - name: hue-intern-service
-  metrics:
-  - name: webmetric
-    successCondition: result[0].value[1] >= "30"
-    provider:
-      web:
-        url: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
-        timeoutSeconds: 20 # defaults to 10 seconds
-        headers:
-          - key: Authorization
-            value: "Bearer ya29.a0AXooCgvWG08Yn9CSfQBKRq67JMN1zBlPv9AZFAeDteue0j2efKs4EGi-FFGbgFYu-_-sk558DUzvEtRSXsXacq5qGBzsYBXdh_JYEQPdRl-nWacr2MOCd8IYJ1mJowp42FJtjG-ESxrH7Ry7CpPelMErdX9h0eE3baqwarIpgqfRaCgYKARASARESFQHGX2MiufmOHQuYFEYNn7v9flrw9Q0179"
-        jsonPath: "{$.data.result}"
+# apiVersion: argoproj.io/v1alpha1
+# kind: AnalysisTemplate
+# metadata:
+#   name: cpu-usage-time
+# spec:
+#   args:
+#   - name: hue-intern-service
+#   metrics:
+#   - name: webmetric
+#     successCondition: result[0].value[1] >= "30"
+#     provider:
+#       web:
+#         url: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
+#         timeoutSeconds: 20 # defaults to 10 seconds
+#         headers:
+#           - key: Authorization
+#             value: "Bearer ya29.a0AXooCgvWG08Yn9CSfQBKRq67JMN1zBlPv9AZFAeDteue0j2efKs4EGi-FFGbgFYu-_-sk558DUzvEtRSXsXacq5qGBzsYBXdh_JYEQPdRl-nWacr2MOCd8IYJ1mJowp42FJtjG-ESxrH7Ry7CpPelMErdX9h0eE3baqwarIpgqfRaCgYKARASARESFQHGX2MiufmOHQuYFEYNn7v9flrw9Q0179"
+#         jsonPath: "{$.data.result}"
 
----
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: AnalysisTemplate
+# metadata:
+#   name: cpu-usage-time
+# spec:
+#   args:
+#   - name: hue-intern-service
+#   metrics:
+#   - name: webmetric
+#     successCondition: result[0].value[1] >= "30"
+#     provider:
+#       web:
+#         url: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
+#         timeoutSeconds: 20 # defaults to 10 seconds
+#         headers:
+#           - key: Authorization
+#             value: "Bearer ya29.a0AXooCgvWG08Yn9CSfQBKRq67JMN1zBlPv9AZFAeDteue0j2efKs4EGi-FFGbgFYu-_-sk558DUzvEtRSXsXacq5qGBzsYBXdh_JYEQPdRl-nWacr2MOCd8IYJ1mJowp42FJtjG-ESxrH7Ry7CpPelMErdX9h0eE3baqwarIpgqfRaCgYKARASARESFQHGX2MiufmOHQuYFEYNn7v9flrw9Q0179"
+#         jsonPath: "{$.data.result}"
+
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: cpu-usage-time
+  name: success-rate
 spec:
   args:
   - name: hue-intern-service
   metrics:
-  - name: webmetric
-    successCondition: result[0].value[1] >= "30"
+  - name: success-rate
+    interval: 5m
+    # NOTE: prometheus queries return results in the form of a vector.
+    # So it is common to access the index 0 of the returned array to obtain the value
+    successCondition: result[0] >= 0.95
+    failureLimit: 3
     provider:
-      web:
-        url: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
-        timeoutSeconds: 20 # defaults to 10 seconds
+      prometheus:
+        address: http://34.147.15.0:80
+        # timeout is expressed in seconds
+        timeout: 40
         headers:
-          - key: Authorization
-            value: "Bearer ya29.a0AXooCgvWG08Yn9CSfQBKRq67JMN1zBlPv9AZFAeDteue0j2efKs4EGi-FFGbgFYu-_-sk558DUzvEtRSXsXacq5qGBzsYBXdh_JYEQPdRl-nWacr2MOCd8IYJ1mJowp42FJtjG-ESxrH7Ry7CpPelMErdX9h0eE3baqwarIpgqfRaCgYKARASARESFQHGX2MiufmOHQuYFEYNn7v9flrw9Q0179"
-        jsonPath: "{$.data.result}"
+        - name: X-Scope-Org-ID
+          value: tenant_a
+        query: |
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.hue-intern-service}}",response_code!~"5.*"}[5m]
+          )) /
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.hue-intern-service}}"}[5m]
+          ))
+
 
