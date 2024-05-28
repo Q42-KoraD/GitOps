@@ -16,7 +16,7 @@ spec:
     canary:
       analysis:
         templates:
-        - templateName: cpu-usage-time
+        - templateName: success-rate
         startingStep: 1 # delay starting analysis run until setWeight: 40%
         args:
         - name: hue-intern-service
