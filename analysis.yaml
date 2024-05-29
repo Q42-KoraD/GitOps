@@ -82,7 +82,7 @@ spec:
     failureLimit: 3
     provider:
       prometheus:
-        address: http://34.147.15.0:80
+        address: http://34.90.226.114:80
         # timeout is expressed in seconds
         timeout: 40
         headers:
