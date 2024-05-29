@@ -88,7 +88,11 @@ spec:
         headers:
         - key: X-Scope-Org-ID
           value: tenant_a
-        query: |
-          up
+        query: sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}",response_code!~"5.*"}[5m]
+          )) /
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}"}[5m]
+          ))
 
 
