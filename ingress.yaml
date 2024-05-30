@@ -4,10 +4,9 @@ metadata:
   name: hue-intern-ingress
 spec:
   rules:
-  - host: localhost
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /*
         pathType: Prefix
         backend:
           service:
