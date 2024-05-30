@@ -12,7 +12,7 @@ spec:
           service:
             name: hue-intern-service
             port:
-              number: 80
+              number: 3000
 # ---
 # apiVersion: v1
 # data:
