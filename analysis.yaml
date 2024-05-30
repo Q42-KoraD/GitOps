@@ -79,7 +79,7 @@ spec:
     # NOTE: prometheus queries return results in the form of a vector.
     # So it is common to access the index 0 of the returned array to obtain the value
     # successCondition: result[0] == 1.00
-    successCondition: len(result) > 0 && result[0] >= 999.95
+    successCondition: len(result) > 0 && result[0] >= 1.00
     failureLimit: 3
     provider:
       prometheus:
