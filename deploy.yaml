@@ -39,7 +39,7 @@ spec:
         app: hue-intern
     spec:
       containers:
-      - image: europe-west4-docker.pkg.dev/stage-kora-dokbua/hue-intern/hue-intern:8d103bf59295e07682b649f2ed5edcb1c78fac3a
+      - image: europe-west4-docker.pkg.dev/stage-kora-dokbua/hue-intern/hue-intern:6dc761a689b4d355509c42cb1c84c34f7e6b2f08
         imagePullPolicy: Always
         name: hue-intern
         ports:
