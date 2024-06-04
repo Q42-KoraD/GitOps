@@ -78,8 +78,8 @@ spec:
     interval: 5s
     # NOTE: prometheus queries return results in the form of a vector.
     # So it is common to access the index 0 of the returned array to obtain the value
-    # successCondition: result[0] == 1.00
-    successCondition: len(result) > 0 && result[0] >= 1.00
+    successCondition: len(result) > 0 && result[0] == 0.00
+    # failure limit has to at least 3 for the analysis to work properly
     failureLimit: 3
     provider:
       prometheus:
@@ -89,6 +89,6 @@ spec:
         headers:
         - key: X-Scope-Org-ID
           value: tenant_a
-        query: 'promhttp_metric_handler_requests_total{code="200", job="monitor hue-intern"}'
+        query: 'promhttp_metric_handler_requests_total{code="500", job="monitor hue-intern"}'
 
 
