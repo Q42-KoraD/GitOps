@@ -64,13 +64,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hue-intern-ingress
+  namespace: default
   annotations:
-    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.class: "gce-internal"
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: hue-intern-service
-          servicePort: 80
+  defaultBackend:
+    service:
+      name: hue-intern-service
+      port:
+        number: 80
