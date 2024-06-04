@@ -36,7 +36,7 @@ spec:
           service:
             name: hue-intern-service
             port:
-              number: 31718
+              number: 80
 # kind: Ingress
 # metadata:
 #   name: hue-intern-ingress
