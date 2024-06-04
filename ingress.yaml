@@ -1,4 +1,4 @@
-e# apiVersion: networking.k8s.io/v1
+# apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
 #   name: hue-intern-ingress
