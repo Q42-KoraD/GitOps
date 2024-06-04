@@ -27,12 +27,12 @@ spec:
       - setWeight: 50
       - pause:
           duration: 45
-      # - setWeight: 80
-      # - pause:
-      #     duration: 30
-      # - setWeight: 99
-      # - pause:
-      #     duration: 90
+      - setWeight: 80
+      - pause:
+          duration: 30
+      - setWeight: 99
+      - pause:
+          duration: 90
   template:
     metadata:
       labels:
