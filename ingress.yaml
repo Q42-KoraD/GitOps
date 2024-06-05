@@ -1,26 +1,4 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: hue-intern-ingress
-# spec:
-#   rules:
-#   - http:
-#       paths:
-#       - path: /color
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: hue-intern-service
-#             port:
-#               number: 80
-# ---
-# apiVersion: v1
-# data:
-#   allow-backend-server-header: "true"
-#   use-forwarded-headers: "true"
-# kind: ConfigMap
-# metadata:
-#   name: nginx-configuration
+
 # --- THIS ONE
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
@@ -37,42 +15,6 @@
 #             name: hue-intern-service
 #             port:
 #               number: 80
-# kind: Ingress
-# metadata:
-#   name: hue-intern-ingress
-# spec:
-#   defaultBackend:
-#     service:
-#       name: hue-intern-service
-#       port:
-#         number: 80
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: hue-intern-ingress
-#   annotations:
-#     kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
-# spec:
-#   defaultBackend:
-#     service:
-#       name: hue-intern-service
-#       port:
-#         number: 80
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: hue-intern-ingress
-#   namespace: default
-#   annotations:
-#     kubernetes.io/ingress.class: "gce-internal"
-# spec:
-#   defaultBackend:
-#     service:
-#       name: hue-intern-service
-#       port:
-#         number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
