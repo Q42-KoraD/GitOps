@@ -21,22 +21,22 @@
 # kind: ConfigMap
 # metadata:
 #   name: nginx-configuration
-# ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: hue-intern-ingress
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: hue-intern-service
-            port:
-              number: 80
+# --- THIS ONE
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: hue-intern-ingress
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: hue-intern-service
+#             port:
+#               number: 80
 # kind: Ingress
 # metadata:
 #   name: hue-intern-ingress
@@ -73,3 +73,15 @@ spec:
 #       name: hue-intern-service
 #       port:
 #         number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hue-intern-ingress
+spec:
+  ingressClassName: "gce"
+  defaultBackend:
+    service:
+      name: hue-intern-service
+      port:
+        number: 80
