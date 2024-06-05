@@ -25,30 +25,30 @@
 #   sessionAffinity: None
 #   type: LoadBalancer
 # ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: hue-intern-service
-# spec:
-#   selector:
-#     app: hue-intern
-#   ports:
-#     - port: 80
-#       targetPort: 3000
-#   type: LoadBalancer
-# ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: hue-intern-service
-  labels:
-    app: hue-intern
 spec:
-  ports:
-  - port: 80
-    targetPort: grpc
-    name: proxy-grpc
   selector:
     app: hue-intern
-  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: LoadBalancer
+# ---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: hue-intern-service
+#   labels:
+#     app: hue-intern
+# spec:
+#   ports:
+#   - port: 80
+#     targetPort: grpc
+#     name: proxy-grpc
+#   selector:
+#     app: hue-intern
+#   type: ClusterIP
