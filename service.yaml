@@ -38,10 +38,26 @@
 #   type: LoadBalancer
 # ---
 
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   cloud.google.com/app-protocols: '{"proxy-grpc":"HTTP2"}'
+#   name: hue-intern-service
+#   labels:
+#     app: hue-intern
+# spec:
+#   ports:
+#   - port: 80
+#     protocol: TCP
+#     targetPort: 3000
+#     name: proxy-grpc
+#   selector:
+#     app: hue-intern
+#   type: NodePort
+# ---
 apiVersion: v1
 kind: Service
 metadata:
-  cloud.google.com/app-protocols: '{"proxy-grpc":"HTTP2"}'
   name: hue-intern-service
   labels:
     app: hue-intern
@@ -50,7 +66,6 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 3000
-    name: proxy-grpc
   selector:
     app: hue-intern
   type: NodePort
