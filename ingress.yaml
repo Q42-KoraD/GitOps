@@ -23,7 +23,7 @@ metadata:
 spec:
   ingressClassName: "gce"
   tls:
-    secretName: grpc-server-tls
+    secretName: grpc-gke-ingress-demo-tls
   defaultBackend:
     service:
       name: hue-intern-service
