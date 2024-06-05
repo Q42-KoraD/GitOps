@@ -14,13 +14,13 @@ spec:
       app: hue-intern
   strategy:
     canary:
-      analysis:
-        templates:
-        - templateName: success-rate
-        startingStep: 1 # delay starting analysis run until setWeight: 40%
-        args:
-        - name: hue-intern-service
-          value: hue-intern-service.default.svc.cluster.local
+      # analysis:
+        # templates:
+        # - templateName: success-rate
+        # startingStep: 1 # delay starting analysis run until setWeight: 40%
+        # args:
+        # - name: hue-intern-service
+        #   value: hue-intern-service.default.svc.cluster.local
       maxSurge: "25%"
       maxUnavailable: 0
       steps:
@@ -44,6 +44,7 @@ spec:
         name: hue-intern
         ports:
         - containerPort: 3000
+          name: grpc
         resources:
           limits:
             cpu: 500m
