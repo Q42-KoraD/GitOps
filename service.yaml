@@ -51,4 +51,4 @@ spec:
     name: proxy-grpc
   selector:
     app: hue-intern
-  type: NodePort
+  type: ClusterIP
