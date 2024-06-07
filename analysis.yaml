@@ -89,6 +89,7 @@ spec:
         headers:
         - key: X-Scope-Org-ID
           value: tenant_a
-        query: 'promhttp_metric_handler_requests_total{code="500", job="monitor hue-intern"}'
+        # query: 'promhttp_metric_handler_requests_total{code="500", job="monitor hue-intern"}'
+        query: 'sum(promhttp_metric_handler_requests_total{code=~"5.*", job="monitor hue-intern"})'
 
 
