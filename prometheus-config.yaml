@@ -11,4 +11,4 @@ data:
     scrape_configs:
       - job_name: 'monitor hue-intern'
         static_configs:
-          - targets: ['34.49.91.119:80']
+          - targets: ['34.107.148.18:80']
