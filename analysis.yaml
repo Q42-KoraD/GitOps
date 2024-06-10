@@ -1,71 +1,3 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: AnalysisTemplate
-# metadata:
-#   name: success-rate
-# spec:
-#   args:
-#   - name: hue-intern-service
-#   metrics:
-#   - name: success-rate
-#     interval: 5s
-#     # NOTE: prometheus queries return results in the form of a vector.
-#     # So it is common to access the index 0 of the returned array to obtain the value
-#     successCondition: data.result[0].value[1] >= 1
-#     # failureCondition: result[0] < 0.9
-#     failureLimit: 1
-#     provider:
-#       prometheus:
-#         address: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query/'
-#         # timeout is expressed in seconds
-#         timeout: 40
-#         headers:
-#         - key: 'Authorization'
-#           value: 'Bearer ya29.a0AXooCgtVdC4TmzGlrcMb_Jtfru4gQHULDGDAzuweKlLynZz1_FJkbVqX2KIV4r3lX2gTa_8sFBvS__3DTYGL34lZrDUlII0H4jOzK67qshI9o4MuN5NC1gkXJ4qqjfwXPmWWG63lFwtTPI65F7sZJu51uueLrpti26HgawoSHMBAaCgYKAd4SARESFQHGX2MiGZD2bx6NHYoEHYLRDhESOA0179'
-#         query: 'up'
-#         # data:
-#         # - key: 'query'
-#         #   value: 'up'
-
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: AnalysisTemplate
-# metadata:
-#   name: cpu-usage-time
-# spec:
-#   args:
-#   - name: hue-intern-service
-#   metrics:
-#   - name: webmetric
-#     successCondition: result[0].value[1] >= "30"
-#     provider:
-#       web:
-#         url: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
-#         timeoutSeconds: 20 # defaults to 10 seconds
-#         headers:
-#           - key: Authorization
-#             value: "Bearer ya29.a0AXooCgvWG08Yn9CSfQBKRq67JMN1zBlPv9AZFAeDteue0j2efKs4EGi-FFGbgFYu-_-sk558DUzvEtRSXsXacq5qGBzsYBXdh_JYEQPdRl-nWacr2MOCd8IYJ1mJowp42FJtjG-ESxrH7Ry7CpPelMErdX9h0eE3baqwarIpgqfRaCgYKARASARESFQHGX2MiufmOHQuYFEYNn7v9flrw9Q0179"
-#         jsonPath: "{$.data.result}"
-
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: AnalysisTemplate
-# metadata:
-#   name: cpu-usage-time
-# spec:
-#   args:
-#   - name: hue-intern-service
-#   metrics:
-#   - name: webmetric
-#     successCondition: result[0].value[1] >= "30"
-#     provider:
-#       web:
-#         url: 'https://monitoring.googleapis.com/v1/projects/stage-kora-dokbua/location/global/prometheus/api/v1/query?query=kubernetes_io:container_cpu_core_usage_time{container_name="hue-intern"}'
-#         timeoutSeconds: 20 # defaults to 10 seconds
-#         headers:
-#           - key: Authorization
-#             value: "Bearer ya29.a0AXooCgvWG08Yn9CSfQBKRq67JMN1zBlPv9AZFAeDteue0j2efKs4EGi-FFGbgFYu-_-sk558DUzvEtRSXsXacq5qGBzsYBXdh_JYEQPdRl-nWacr2MOCd8IYJ1mJowp42FJtjG-ESxrH7Ry7CpPelMErdX9h0eE3baqwarIpgqfRaCgYKARASARESFQHGX2MiufmOHQuYFEYNn7v9flrw9Q0179"
-#         jsonPath: "{$.data.result}"
-
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
@@ -78,8 +10,8 @@ spec:
     interval: 10s
     # NOTE: prometheus queries return results in the form of a vector.
     # So it is common to access the index 0 of the returned array to obtain the value
-    # successCondition: len(result) > 0 && result[0] == 0.00
-    failureCondition: len(result) > 0 && result[0] > -1.00
+    successCondition: len(result) > 0 && result[0] >= 1.00
+    # failureCondition: len(result) > 0 && result[0] > -1.00
     # failure limit has to at least 3 for the analysis to work properly
     failureLimit: 3
     provider:
@@ -90,7 +22,7 @@ spec:
         headers:
         - key: X-Scope-Org-ID
           value: tenant_a
-        # query: 'promhttp_metric_handler_requests_total{code="200", job="monitor hue-intern"}'
-        query: 'sum(promhttp_metric_handler_requests_total{code=~"5.*", job="monitor hue-intern"})'
+        query: 'promhttp_metric_handler_requests_total{code="200", job="monitor hue-intern"}'
+        # query: 'sum(promhttp_metric_handler_requests_total{code=~"5.*", job="monitor hue-intern"})'
 
 
